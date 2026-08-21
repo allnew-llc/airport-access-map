@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101b2d" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://cyberjapandata.gsi.go.jp https://maps.gsi.go.jp; img-src 'self' data: blob: https://cyberjapandata.gsi.go.jp https://maps.gsi.go.jp; font-src 'self' data: https://maps.gsi.go.jp; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'"
+    />
+    <meta
+      name="description"
+      data-i18n-content="metaDescription"
+      content="成田空港を利用する海外旅行者が、欠航・運休・災害時に次の安全な行動を選ぶための公式情報ワンストップガイド"
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <title>NARITA ACCESS NOW｜成田空港アクセス障害ガイド</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#map-decision" data-i18n="skipToCurrent">現在の状況へ移動</a>
+    <main class="app-shell">
+      <section id="emergency-banner" class="emergency-banner" role="alert" aria-live="assertive" hidden>
+        <div class="emergency-banner-copy">
+          <strong id="emergency-banner-title"></strong>
+          <time id="emergency-banner-time"></time>
+          <p id="emergency-banner-description"></p>
+        </div>
+        <a id="emergency-banner-action" href="#" target="_blank" rel="noopener noreferrer"></a>
+      </section>
+
+      <header class="topbar">
+        <div class="brand-block">
+          <span id="airport-brand-code" class="brand-mark" aria-hidden="true">NRT</span>
+          <div class="brand-copy">
+            <h1 class="visually-hidden" data-i18n="dashboardTitle">成田空港アクセス状況</h1>
+            <button
+              id="airport-picker-button"
+              class="airport-title-control"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="airport-picker-dialog"
+              aria-expanded="false"
+            >
+              <span id="airport-title-text" class="airport-title-text">成田空港</span>
+              <span class="airport-title-chevron" aria-hidden="true">⌄</span>
+            </button>
+            <p class="brand-subtitle" data-i18n="dashboardSubtitle">鉄道・バス・道路・空港</p>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <label class="language-control" for="language-select">
+            <span>Language</span>
+            <select id="language-select" data-i18n-aria-label="languageLabel">
+              <option value="ja">日本語</option>
+              <option value="en">English</option>
+              <option value="zh-CN">简体中文</option>
+              <option value="zh-TW">繁體中文</option>
+              <option value="ko">한국어</option>
+            </select>
+          </label>
+          <div id="status-banner" class="status-banner" role="status" aria-live="polite">
+            <span id="andon-dot" class="andon-dot is-loading" aria-hidden="true"></span>
+            <div>
+              <span id="andon-label" data-i18n="dataChecking">データ確認中</span>
+              <time id="updated-at">—</time>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div id="sample-demo-banner" class="sample-demo-banner" role="status" data-i18n="sampleBanner" hidden>
+        架空サンプルデータ｜実際の運行状況ではありません
+      </div>
+
+      <dialog id="airport-picker-dialog" class="airport-picker-dialog" aria-labelledby="airport-picker-title">
+        <div class="airport-picker-sheet">
+          <header class="airport-picker-header">
+            <div>
+              <span class="airport-picker-kicker">AIRPORT</span>
+              <h2 id="airport-picker-title" data-i18n="airportPickerTitle">空港を選択</h2>
+            </div>
+            <button
+              id="airport-picker-close"
+              class="airport-picker-close"
+              type="button"
+              data-i18n-aria-label="airportPickerClose"
+              aria-label="空港選択を閉じる"
+            >×</button>
+          </header>
+          <label class="airport-search-field" for="airport-search">
+            <span data-i18n="airportSearchLabel">空港名または3レターコード</span>
+            <input
+              id="airport-search"
+              type="search"
+              autocomplete="off"
+              spellcheck="false"
+              data-i18n-placeholder="airportSearchPlaceholder"
+              data-i18n-aria-label="airportSearchLabel"
+              placeholder="例：羽田、HND、Haneda"
+            />
+          </label>
+          <p id="airport-search-summary" class="airport-search-summary" role="status" aria-live="polite"></p>
+          <div id="airport-search-results" class="airport-search-results"></div>
+          <p id="airport-search-empty" class="airport-search-empty" data-i18n="airportSearchEmpty" hidden>
+            一致する空港がありません。空港名または3レターコードを変えてください。
+          </p>
+        </div>
+      </dialog>
+
+      <section id="status-ticker" class="status-ticker" aria-label="交通状況速報" data-i18n-aria-label="statusTickerAria">
+        <button id="status-ticker-toggle" class="status-ticker-toggle" type="button" aria-pressed="false">
+          <span aria-hidden="true">Ⅱ</span>
+          <span class="visually-hidden" data-i18n="statusTickerPause">交通状況の表示を一時停止</span>
+        </button>
+        <time id="status-ticker-context" class="status-ticker-context" aria-live="polite">—</time>
+        <div class="status-ticker-viewport">
+          <div id="status-ticker-track" class="status-ticker-track"></div>
+        </div>
+      </section>
+
+      <section id="replay-dock" class="replay-dock" data-mode="live" aria-label="表示モードと過去データ再生" data-i18n-aria-label="replayAria">
+        <div class="replay-mode-block">
+          <div id="replay-mode-tabs" class="replay-mode-tabs" role="tablist" aria-label="表示モード" data-i18n-aria-label="replayModeHeading">
+            <button id="live-mode-button" class="replay-mode-button is-active" type="button" role="tab" aria-selected="true" data-view-mode="live" data-i18n="liveMode">現在の状況</button>
+            <button id="history-mode-button" class="replay-mode-button" type="button" role="tab" aria-selected="false" data-view-mode="history" data-i18n="historyMode">履歴</button>
+          </div>
+          <label id="sample-scenario-control" class="sample-scenario-control" for="sample-scenario-select" hidden>
+            <span data-i18n="sampleScenarioLabel">デモ</span>
+            <select id="sample-scenario-select">
+                <option value="live" data-i18n="sampleNormalMode">平常時</option>
+                <option value="history" data-i18n="sampleDisruptionMode">交通障害時（デモ）</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="history-range-summary" class="history-range-summary">
+          <div>
+            <span data-i18n="historyRangeHeading">表示期間</span>
+            <strong id="history-range-label">—</strong>
+            <small data-i18n="historyRangeTimeZone">日本時間（JST）</small>
+          </div>
+          <button id="history-range-button" type="button" data-i18n="historyRangeChange">期間を変更</button>
+        </div>
+
+        <div id="replay-controls" class="replay-controls" aria-label="過去データ再生コントロール" data-i18n-aria-label="replayControlsAria">
+          <button id="replay-play" class="replay-play" type="button" disabled>
+            <span class="replay-play-icon" aria-hidden="true">▶</span>
+            <span id="replay-play-label" data-i18n="playReplay">再生</span>
+          </button>
+          <div class="replay-scrubber">
+            <div class="replay-time-row">
+              <output id="replay-time" for="replay-range">—</output>
+              <span id="replay-step">0 / 0</span>
+            </div>
+            <input id="replay-range" type="range" min="0" max="0" step="1" value="0" disabled data-i18n-aria-label="replayScrubberAria" />
+            <div class="replay-date-scale" aria-hidden="true"><span id="replay-range-start-label">—</span><span id="replay-range-end-label">—</span></div>
+          </div>
+          <label class="replay-speed" for="replay-speed">
+            <span data-i18n="replaySpeed">速度</span>
+            <select id="replay-speed" disabled>
+              <option value="1">1×</option>
+              <option value="2" selected>2×</option>
+              <option value="4">4×</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="replay-readback" class="replay-readback" role="status" aria-live="polite">
+          <div>
+            <strong id="replay-headline" data-i18n="liveReplayHeadline">現在の公式データを表示</strong>
+            <p id="replay-summary" data-i18n="liveReplaySummary">8月13〜14日の推移を見るには「過去再生」を選択してください。</p>
+            <small id="replay-safety-note" class="replay-safety-note" data-i18n="historySafetyNotice">過去の状況です。現在の移動には最新の公式情報を確認してください。</small>
+          </div>
+          <a id="replay-source-link" href="https://www.data.jma.go.jp/developer/xml/feed/extra_l.xml" target="_blank" rel="noopener noreferrer" hidden data-i18n="openHistoricalSource">当時の気象庁原文</a>
+        </div>
+      </section>
+
+      <dialog id="history-range-dialog" class="history-range-dialog" aria-labelledby="history-range-dialog-title">
+        <form id="history-range-form" class="history-range-form">
+          <div class="history-range-dialog-heading">
+            <div>
+              <span>HISTORY / JST</span>
+              <h2 id="history-range-dialog-title" data-i18n="historyRangeDialogTitle">履歴の期間を選択</h2>
+            </div>
+            <button id="history-range-close" class="history-range-close" type="button" data-i18n-aria-label="historyRangeCancel">×</button>
+          </div>
+          <p data-i18n="historyRangeDialogDescription">現在から過去31日間の範囲で指定できます。</p>
+          <div class="history-range-fields">
+            <label for="history-start-input">
+              <span data-i18n="historyRangeStart">開始</span>
+              <input id="history-start-input" name="history-start" type="datetime-local" step="60" required />
+            </label>
+            <span class="history-range-arrow" aria-hidden="true">→</span>
+            <label for="history-end-input">
+              <span data-i18n="historyRangeEnd">終了</span>
+              <input id="history-end-input" name="history-end" type="datetime-local" step="60" required />
+            </label>
+          </div>
+          <p id="history-range-error" class="history-range-error" role="alert" aria-live="assertive" hidden></p>
+          <div class="history-range-actions">
+            <button id="history-range-cancel" type="button" data-i18n="historyRangeCancel">キャンセル</button>
+            <button id="history-range-apply" type="submit" data-i18n="historyRangeApply">この期間を表示</button>
+          </div>
+        </form>
+      </dialog>
+
+      <section class="control-dashboard" aria-label="災害時交通情報" data-i18n-aria-label="workspaceAria">
+        <aside class="command-rail">
+          <section id="current-situation" class="rail-panel transport-panel" aria-labelledby="current-situation-heading">
+            <div class="panel-heading is-status">
+              <span>1.</span>
+              <h2 id="current-situation-heading" data-i18n="transportSituationHeading">いまの交通状況</h2>
+              <div id="phase-context" class="phase-context" data-phase="live" role="status" aria-live="polite">
+                <span id="phase-label"></span>
+                <strong id="phase-action"></strong>
+                <small id="coverage-summary"></small>
+              </div>
+            </div>
+            <p class="panel-intro" data-i18n="currentSituationIntro">鉄道・バス・道路・空港をまとめて確認できます。</p>
+            <div id="transport-overview" class="transport-overview" aria-live="polite"></div>
+            <details class="transport-details">
+              <summary data-i18n="showTransportDetails">路線別に見る</summary>
+              <div id="current-status-groups" class="current-status-groups"></div>
+            </details>
+          </section>
+
+          <section class="rail-panel priority-panel" aria-labelledby="priority-heading">
+            <div class="panel-heading is-warning">
+              <span>2.</span>
+              <h2 id="priority-heading" data-i18n="priorityHeading">いま注意すること</h2>
+            </div>
+            <div id="priority-incident" class="priority-incident" aria-live="polite"></div>
+            <div id="current-summary" class="current-summary" role="status" aria-live="polite">
+              <span class="summary-beacon" aria-hidden="true"></span>
+              <p data-i18n="currentStatusLoading">公式データを確認中</p>
+            </div>
+          </section>
+
+          <section class="rail-panel trust-panel action-panel" aria-labelledby="trust-heading">
+            <div class="panel-heading">
+              <span>3.</span>
+              <h2 id="trust-heading" data-i18n="trustHeading">次にすること</h2>
+            </div>
+            <nav class="decision-shortcuts" aria-label="旅行者別の次の行動" data-i18n-aria-label="journeyModeLabel">
+              <a href="#travel-decision" data-journey-link="arrival">
+                <span aria-hidden="true" data-airport-direction="from">NRT →</span>
+                <strong data-i18n="quickArrivalAction">空港から出たい</strong>
+              </a>
+              <a href="#travel-decision" data-journey-link="departure">
+                <span aria-hidden="true" data-airport-direction="to">→ NRT</span>
+                <strong data-i18n="quickDepartureAction">空港へ向かう</strong>
+              </a>
+              <a href="#cannot-move-heading" class="is-support">
+                <span aria-hidden="true">STAY / INFO</span>
+                <strong data-i18n="quickSupportAction">空港に滞在</strong>
+              </a>
+            </nav>
+            <details class="source-drawer">
+              <summary data-i18n="sourcesAndReliability">情報源</summary>
+              <div class="trust-summary">
+                <span class="trust-shield" aria-hidden="true">✓</span>
+                <span><strong id="trust-state-label" data-i18n="trustChecking">情報源を確認中</strong><small id="trust-state-detail" data-i18n="trustDetail">公式情報</small></span>
+              </div>
+              <div id="source-trust-links" class="source-trust-links"></div>
+            </details>
+          </section>
+        </aside>
+
+        <div class="map-command">
+          <div class="map-stage">
+            <div id="map" role="region" aria-label="成田空港周辺の交通・気象地図" data-i18n-aria-label="mapAria"></div>
+            <div id="map-error" class="map-error" role="alert" hidden></div>
+
+            <section id="map-decision" class="map-decision is-loading" aria-label="移動方向を選択" data-i18n-aria-label="journeyModeLabel">
+              <nav class="map-journey-switch" aria-label="移動方向を選択" data-i18n-aria-label="journeyModeLabel">
+                <button type="button" data-map-journey="arrival" aria-pressed="false">
+                  <span aria-hidden="true" data-airport-direction="from">NRT →</span>
+                  <strong data-i18n="mapJourneyArrival">空港から移動</strong>
+                </button>
+                <button type="button" data-map-journey="departure" aria-pressed="false">
+                  <span aria-hidden="true" data-airport-direction="to">→ NRT</span>
+                  <strong data-i18n="mapJourneyDeparture">空港へ移動</strong>
+                </button>
+                <button type="button" data-map-journey="stranded" aria-pressed="false">
+                  <span aria-hidden="true">STAY</span>
+                  <strong data-i18n="mapJourneyStranded">空港に滞在</strong>
+                </button>
+              </nav>
+              <button
+                id="map-decision-toggle"
+                class="map-decision-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="map-decision-body"
+              >
+                <span class="map-decision-summary-copy">
+                  <span class="map-decision-meta">
+                    <span id="map-decision-kicker" data-i18n="transportStatusSummary">交通状況</span>
+                    <time id="map-decision-time">—</time>
+                  </span>
+                  <strong id="map-decision-title" data-i18n="currentStatusLoading">データを確認中</strong>
+                  <small id="map-decision-detail" data-i18n="mapDecisionLoadingDetail">移動判断に必要な情報を読み込んでいます。</small>
+                </span>
+                <span class="map-decision-toggle-label">
+                  <span id="map-decision-toggle-label" data-i18n="mapDecisionOpen">詳細を開く</span>
+                  <span class="map-decision-toggle-icon" aria-hidden="true"></span>
+                </span>
+              </button>
+
+            </section>
+
+            <nav id="map-layer-toolbar" class="map-layer-toolbar" data-control-purpose="layer-visibility" aria-label="地図上の情報を切り替え" data-i18n-aria-label="mapLayerControlsAria">
+              <button type="button" data-map-layer="railway" aria-pressed="true"><span aria-hidden="true">🚆</span><strong data-i18n="mapLayerTrain">電車</strong><small class="layer-visibility-indicator" aria-hidden="true">表示中</small></button>
+              <button type="button" data-map-layer="bus" aria-pressed="true"><span aria-hidden="true">🚌</span><strong data-i18n="mapLayerBus">バス</strong><small class="layer-visibility-indicator" aria-hidden="true">表示中</small></button>
+              <button type="button" data-map-layer="road" aria-pressed="true"><span aria-hidden="true">🚗</span><strong data-i18n="mapLayerRoad">道路</strong><small class="layer-visibility-indicator" aria-hidden="true">表示中</small></button>
+              <button id="weather-layer-button" type="button" data-map-layer="weather" aria-pressed="true"><span aria-hidden="true">☔</span><strong data-i18n="mapLayerWeather">気象</strong><small class="layer-visibility-indicator" aria-hidden="true">表示中</small></button>
+            </nav>
+
+            <div id="weather-map-legend" class="weather-map-legend" role="note" aria-label="気象情報の凡例" data-i18n-aria-label="weatherLegendAria" hidden>
+              <strong data-i18n="weatherLegendTitle">気象警報区域</strong>
+              <span><i class="weather-legend-swatch is-warning" aria-hidden="true"></i><span data-i18n="weatherLegendWarning">黄：警戒</span></span>
+              <span><i class="weather-legend-swatch is-severe" aria-hidden="true"></i><span data-i18n="weatherLegendSevere">赤：重大</span></span>
+              <span><i class="weather-legend-boundary" aria-hidden="true"></i><span data-i18n="weatherLegendBoundary">破線：対象区域</span></span>
+            </div>
+
+            <div class="map-readback" aria-live="polite">
+              <strong id="current-feed-label" data-i18n="currentStatusLoading">公式データを確認中</strong>
+              <time id="current-feed-time">—</time>
+            </div>
+
+            <a id="airport-info-link" class="airport-info-link" href="https://www.narita-airport.jp/en/news/" target="_blank" rel="noopener noreferrer">
+              <span aria-hidden="true">✈</span><span data-i18n="airportAlerts">空港のお知らせ</span>
+            </a>
+
+            <div class="map-caption" aria-hidden="true">
+              <span id="map-airport-code">NRT</span>
+              <span id="map-airport-coordinates">35.7720°N / 140.3863°E</span>
+            </div>
+
+            <div class="map-legend" aria-label="地図の凡例" data-i18n-aria-label="legendAria">
+              <div class="legend-row legend-status-row">
+                <strong data-i18n="legendTitle">凡例</strong>
+                <span><i class="legend-swatch is-suspended"></i><span data-i18n="legendSuspended">見合わせ・通行止め</span></span>
+                <span><i class="legend-swatch is-warning"></i><span data-i18n="legendWarning">遅延・規制</span></span>
+                <span><i class="legend-swatch is-normal"></i><span data-i18n="legendNormal">正常</span></span>
+                <span><i class="legend-swatch is-unknown"></i><span data-i18n="legendUnknown">参考ルート</span></span>
+              </div>
+              <div class="legend-row network-legend-row" aria-label="交通ネットワーク実ルート" data-i18n-aria-label="networkLegendAria">
+                <strong>NETWORK</strong>
+                <span><i class="network-swatch is-jr"></i>JR</span>
+                <span><i class="network-swatch is-keisei"></i>京成</span>
+                <span><i class="network-swatch is-hokuso"></i>北総</span>
+                <span><i class="network-swatch is-access"></i>SKY ACCESS</span>
+                <span><i class="network-swatch is-e51"></i>E51</span>
+                <span><i class="network-swatch is-c4"></i>C4</span>
+                <span><i class="network-swatch is-route51"></i>R51</span>
+                <span><i class="network-swatch is-route295"></i>R295</span>
+              </div>
+            </div>
+
+            <details id="incident-feed" class="map-events-panel">
+              <summary>
+                <span data-i18n="mapEventsLabel">地図上の事象</span>
+                <span id="event-count" class="event-count" aria-label="表示件数" data-i18n-aria-label="eventCountAria">0</span>
+              </summary>
+              <div class="map-events-body">
+                <div id="demo-notice" class="demo-notice" hidden>
+                  <strong data-i18n="demoTitle">デモデータ</strong>
+                  <span data-i18n="demoNotice">過去データの再生表示</span>
+                </div>
+                <fieldset id="layer-control" class="layer-control">
+                  <legend data-i18n="layerLegend">表示レイヤー</legend>
+                </fieldset>
+                <div id="event-list" class="event-list" aria-live="polite"></div>
+                <div class="source-note">
+                  <a id="regional-disaster-link" href="https://www.bousai.pref.chiba.lg.jp/" target="_blank" rel="noopener noreferrer" data-i18n="openChibaPortal">千葉県防災ポータルを開く</a>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+
+      </section>
+
+      <section id="travel-decision" class="journey-board journey-board-compact" hidden>
+        <details id="transport-detail-disclosure" class="journey-disclosure journey-transport-disclosure" data-transport-theme="rail" hidden>
+          <summary id="transport-detail-heading">
+            <span class="journey-disclosure-icon" aria-hidden="true">↔</span>
+            <span class="journey-disclosure-label">
+              <strong data-i18n="journeyTransportHeading">利用できる交通手段</strong>
+              <small data-i18n="journeyTransportSummary">交通機関ごとの影響を確認</small>
+            </span>
+            <span class="journey-disclosure-chevron" aria-hidden="true"></span>
+          </summary>
+          <div id="map-decision-body" class="journey-disclosure-body map-decision-body" hidden>
+            <nav class="map-transport-tabs" role="tablist" data-control-purpose="detail-selection" aria-label="交通機関の詳細を選択" data-i18n-aria-label="transportModeTabsAria">
+              <button id="map-transport-tab-rail" type="button" role="tab" data-map-transport="rail" aria-selected="true" aria-controls="map-transport-panel"><span class="transport-tab-icon" aria-hidden="true">🚆</span><strong data-i18n="transportRail">鉄道</strong><small id="map-rail-count">0</small></button>
+              <button id="map-transport-tab-bus" type="button" role="tab" data-map-transport="bus" aria-selected="false" aria-controls="map-transport-panel"><span class="transport-tab-icon" aria-hidden="true">🚌</span><strong data-i18n="transportBus">空港バス</strong><small id="map-bus-count">0</small></button>
+              <button id="map-transport-tab-road" type="button" role="tab" data-map-transport="road" aria-selected="false" aria-controls="map-transport-panel"><span class="transport-tab-icon" aria-hidden="true">🚗</span><strong data-i18n="mapLayerRoad">道路</strong><small id="map-road-count">0</small></button>
+            </nav>
+            <section id="map-transport-panel" class="map-transport-panel" role="tabpanel" aria-labelledby="map-transport-tab-rail" data-transport-theme="rail">
+              <div class="map-transport-selection-heading">
+                <span aria-hidden="true">↳</span>
+                <strong id="map-transport-selection-title">鉄道路線</strong>
+              </div>
+              <div
+                id="map-transport-services"
+                class="map-transport-services"
+                role="group"
+                aria-label="路線・道路を選択"
+              ></div>
+              <article id="map-service-detail" class="map-service-detail" aria-live="polite">
+              <header>
+                <div>
+                  <span id="map-service-category" class="map-service-category"></span>
+                  <h3 id="map-service-title"></h3>
+                </div>
+                <span id="map-service-status" class="map-service-status"></span>
+              </header>
+              <dl class="map-service-facts">
+                <div><dt data-i18n="transportDetailSection">区間</dt><dd id="map-service-section">—</dd></div>
+                <div><dt data-i18n="transportDetailDirection">方向</dt><dd id="map-service-direction">—</dd></div>
+                <div><dt data-i18n="transportDetailReason">理由</dt><dd id="map-service-reason">—</dd></div>
+                <div><dt data-i18n="transportDetailUpdated">更新</dt><dd id="map-service-updated">—</dd></div>
+                <div class="is-alternative"><dt data-i18n="transportDetailAlternative">代替</dt><dd id="map-service-alternative">—</dd></div>
+              </dl>
+              <a id="map-decision-link" class="map-service-official-link" href="https://www.narita-airport.jp/en/access/" target="_blank" rel="noopener noreferrer" data-i18n="mapDecisionOfficialSecondary">公式で最新情報を確認</a>
+              </article>
+            </section>
+          </div>
+        </details>
+
+        <details id="airport-wait-disclosure" class="journey-disclosure" hidden>
+          <summary id="cannot-move-heading">
+            <span class="journey-disclosure-icon" aria-hidden="true">◷</span>
+            <span class="journey-disclosure-label">
+              <strong data-i18n="journeyStayHeading">空港内で待つ</strong>
+              <small data-i18n="journeyStaySummary">休憩・通信・宿泊の情報</small>
+            </span>
+            <span class="journey-disclosure-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="journey-disclosure-body">
+            <div class="support-links">
+              <a id="airport-wifi-link" href="https://www.narita-airport.jp/en/service/internet/power-outlet/" target="_blank" rel="noopener noreferrer"><strong data-i18n="wifiPower">Wi-Fi・充電</strong><span data-i18n="wifiPowerDetail">無料Wi-Fiと電源の場所</span></a>
+              <a id="airport-wait-link" href="https://www.narita-airport.jp/en/access/early-morning/" target="_blank" rel="noopener noreferrer"><strong data-i18n="stayAtAirport">空港内で待つ</strong><span data-i18n="stayAtAirportDetail">24時間利用可能エリアと早朝・深夜サービス</span></a>
+              <a id="airport-stay-link" href="https://www.narita-airport.jp/en/service/transportation/" target="_blank" rel="noopener noreferrer"><strong data-i18n="nearbyHotels">休憩・宿泊</strong><span data-i18n="nearbyHotelsDetail">カプセルホテル、シャワー、周辺ホテル</span></a>
+            </div>
+          </div>
+        </details>
+
+        <details id="emergency-support-disclosure" class="journey-disclosure journey-emergency-disclosure" hidden>
+          <summary id="emergency-heading">
+            <span class="journey-disclosure-icon" aria-hidden="true">!</span>
+            <span class="journey-disclosure-label">
+              <strong data-i18n="journeySupportHeading">緊急時・自治体支援</strong>
+              <small data-i18n="journeySupportSummary">多言語相談・避難情報・緊急連絡</small>
+            </span>
+            <span class="journey-disclosure-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="journey-disclosure-body">
+            <div class="support-links emergency-support-links">
+              <a href="tel:+815038162787"><strong data-i18n="jntoHotline">訪日旅行者ホットライン</strong><span data-i18n="jntoHotlineDetail">24時間・英語／中国語／韓国語／日本語　050-3816-2787</span></a>
+              <div class="support-static"><strong data-i18n="emergencyNumbers">生命に関わる緊急通報</strong><span data-i18n="emergencyNumbersDetail">警察 110 ／ 救急・消防 119（緊急時のみ）</span></div>
+              <a id="airport-accessibility-link" href="https://www.narita-airport.jp/en/service/ud/bus-train/" target="_blank" rel="noopener noreferrer"><strong data-i18n="accessibility">移動に配慮が必要な方</strong><span data-i18n="accessibilityDetail">車いす対応の鉄道・バスと空港サポート</span></a>
+            </div>
+            <section class="municipal-support" aria-labelledby="municipal-support-heading">
+              <h3 id="municipal-support-heading" data-i18n="municipalSupportTitle">自治体・避難情報</h3>
+              <p data-i18n="municipalSupportIntro">開設中の避難所と多言語支援</p>
+              <div id="municipal-support-links" class="municipal-support-links"></div>
+            </section>
+          </div>
+        </details>
+      </section>
+
+      <section class="demo-guide" aria-labelledby="demo-guide-heading">
+        <button
+          id="demo-guide-close"
+          class="demo-guide-close"
+          type="button"
+          data-i18n-aria-label="demoGuideClose"
+          aria-label="説明を閉じる"
+        ><span aria-hidden="true">×</span></button>
+        <div class="demo-guide-heading">
+          <h2 id="demo-guide-heading" data-i18n="demoGuideTitle">この画面でできること</h2>
+        </div>
+        <div class="demo-guide-copy">
+          <p data-i18n="demoGuideOverview">空港周辺の交通・気象状況をワンストップで確認できます。</p>
+          <p data-i18n="demoGuideScenario">確認したい空港を選択し、平常時と遅延等発生時を選択すると、交通・気象状況をまとめて確認できます。</p>
+          <p data-i18n="demoGuideStay">空港に待機する場合、空港内で利用できる施設や自治体等の支援情報を確認できます。</p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>Developed by AllNew LLC (Open Source Project)</span>
+        <span class="footer-links">
+          <a href="./terms.html" data-i18n="termsLink">利用規約</a>
+          <a href="./privacy.html" data-i18n="privacyLink">プライバシー</a>
+          <a id="github-link" href="https://github.com/allnew-llc/airport-access-map" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors / ODbL</a>
+        </span>
+      </footer>
+
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

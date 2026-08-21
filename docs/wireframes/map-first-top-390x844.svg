@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844" role="img" aria-labelledby="title desc">
+  <title id="title">D案 地図ファーストトップページ 390×844</title>
+  <desc id="desc">ヘッダーの下に旅行状況選択、交通網地図、最重要事象、公式確認ボタンだけを配置したスマートフォン用ワイヤーフレーム</desc>
+  <rect width="390" height="844" fill="#eef3f6"/>
+  <rect width="390" height="62" fill="#101d2d"/>
+  <rect x="8" y="11" width="38" height="38" rx="3" fill="#0066a1"/>
+  <text x="27" y="35" fill="#fff" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">NRT</text>
+  <text x="55" y="29" fill="#fff" font-family="sans-serif" font-size="14" font-weight="700">成田空港アクセス状況</text>
+  <text x="55" y="44" fill="#cbd5dd" font-family="sans-serif" font-size="9">鉄道・バス・道路・空港</text>
+  <rect x="294" y="11" width="54" height="38" fill="#fff" stroke="#83909a"/>
+  <text x="321" y="35" fill="#101d2d" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">日本語</text>
+  <rect x="352" y="11" width="30" height="38" fill="#fff" stroke="#83909a"/>
+  <circle cx="361" cy="30" r="2" fill="#101d2d"/><circle cx="367" cy="30" r="2" fill="#101d2d"/><circle cx="373" cy="30" r="2" fill="#101d2d"/>
+
+  <rect x="8" y="68" width="374" height="768" fill="#e7eef2" stroke="#7f8b95"/>
+  <path d="M-5 218 C74 170 109 225 181 194 S294 161 407 204" fill="none" stroke="#d0d9de" stroke-width="18"/>
+  <path d="M-8 581 C76 516 134 529 201 470 S309 410 404 353" fill="none" stroke="#d9e2e6" stroke-width="22"/>
+  <path d="M25 680 L93 611 L153 544 L205 456 L258 341 L337 197" fill="none" stroke="#78858e" stroke-width="4"/>
+  <path d="M9 633 L76 566 L147 520 L212 446 L280 363 L375 280" fill="none" stroke="#8c969e" stroke-width="4"/>
+  <path d="M43 744 L93 676 L169 598 L233 517 L291 433 L365 377" fill="none" stroke="#77838c" stroke-width="4"/>
+  <path d="M93 611 L153 544 L205 456" fill="none" stroke="#f3a400" stroke-width="10" stroke-linecap="round"/>
+  <path d="M9 633 L76 566 L147 520" fill="none" stroke="#c62531" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="337" cy="197" r="10" fill="#0066a1" stroke="#fff" stroke-width="3"/>
+  <text x="337" y="220" fill="#101d2d" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">成田空港</text>
+
+  <rect x="18" y="78" width="354" height="58" fill="#fff" stroke="#7f8b95"/>
+  <rect x="22" y="82" width="114" height="50" fill="#103b5f"/>
+  <text x="79" y="102" fill="#fff" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle">NRT →</text>
+  <text x="79" y="119" fill="#fff" font-family="sans-serif" font-size="12" font-weight="700" text-anchor="middle">空港から出たい</text>
+  <rect x="138" y="82" width="114" height="50" fill="#fff" stroke="#aeb8c0"/>
+  <text x="195" y="102" fill="#101d2d" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle">→ NRT</text>
+  <text x="195" y="119" fill="#101d2d" font-family="sans-serif" font-size="12" font-weight="700" text-anchor="middle">空港へ向かう</text>
+  <rect x="254" y="82" width="114" height="50" fill="#fff" stroke="#aeb8c0"/>
+  <text x="311" y="102" fill="#101d2d" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle">STAY / INFO</text>
+  <text x="311" y="119" fill="#101d2d" font-family="sans-serif" font-size="12" font-weight="700" text-anchor="middle">移動できない</text>
+
+  <rect x="18" y="584" width="354" height="238" fill="#fff" stroke="#7f8b95"/>
+  <rect x="18" y="584" width="7" height="238" fill="#f3a400"/>
+  <text x="38" y="612" fill="#344653" font-family="sans-serif" font-size="11" font-weight="700">鉄道・注意</text>
+  <text x="353" y="612" fill="#52616c" font-family="sans-serif" font-size="10" text-anchor="end">更新 12分前</text>
+  <text x="38" y="652" fill="#101d2d" font-family="sans-serif" font-size="21" font-weight="700">JR成田線に遅延情報</text>
+  <text x="38" y="682" fill="#3f4d58" font-family="sans-serif" font-size="13">空港方面への影響を公式情報で確認してください。</text>
+  <rect x="38" y="718" width="178" height="52" fill="#103b5f"/>
+  <text x="127" y="750" fill="#fff" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">JR公式情報を開く</text>
+  <rect x="224" y="718" width="128" height="52" fill="#fff" stroke="#71808a" stroke-width="2"/>
+  <text x="288" y="750" fill="#101d2d" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">詳しく見る</text>
+  <text x="382" y="838" fill="#40515d" font-family="sans-serif" font-size="8" text-anchor="end">D / MAP-FIRST</text>
+</svg>

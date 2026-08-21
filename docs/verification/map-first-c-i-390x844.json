@@ -1,0 +1,169 @@
+{
+  "generated_at": "2026-08-16T09:48:33.731Z",
+  "target_url": "http://127.0.0.1:5173/",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "checks": {
+    "viewportIs390By844": true,
+    "noHorizontalOverflow": true,
+    "mapFillsFirstViewport": true,
+    "journeyContextVisible": true,
+    "semanticAirportVisible": true,
+    "weatherOfficialLinkVisible": true,
+    "fourModeSummaryVisible": true,
+    "decisionVisible": true,
+    "allFiveLocalesFitFirstViewport": true,
+    "topPageClutterRemoved": true,
+    "staleSnapshotShowsLatestDataWithAge": true,
+    "noInternalStatusCopy": true,
+    "mapLoadedWithoutError": true
+  },
+  "measurement": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "horizontalOverflow": 0
+    },
+    "boxes": {
+      "header": {
+        "top": 0,
+        "right": 390,
+        "bottom": 62,
+        "left": 0,
+        "width": 390,
+        "height": 62,
+        "display": "grid",
+        "visibility": "visible"
+      },
+      "map": {
+        "top": 68,
+        "right": 382,
+        "bottom": 838,
+        "left": 8,
+        "width": 374,
+        "height": 770,
+        "display": "block",
+        "visibility": "visible"
+      },
+      "journey": {
+        "top": 79,
+        "right": 371,
+        "bottom": 137,
+        "left": 19,
+        "width": 352,
+        "height": 58,
+        "display": "grid",
+        "visibility": "visible"
+      },
+      "weather": {
+        "top": 141,
+        "right": 167,
+        "bottom": 193.1,
+        "left": 19,
+        "width": 148,
+        "height": 52.1,
+        "display": "flex",
+        "visibility": "visible"
+      },
+      "airport": {
+        "top": 313,
+        "right": 369.3,
+        "bottom": 356,
+        "left": 300.7,
+        "width": 68.7,
+        "height": 43,
+        "display": "flex",
+        "visibility": "visible"
+      },
+      "decision": {
+        "top": 623.5,
+        "right": 371,
+        "bottom": 827,
+        "left": 19,
+        "width": 352,
+        "height": 203.5,
+        "display": "grid",
+        "visibility": "visible"
+      },
+      "modeStrip": {
+        "top": 647.5,
+        "right": 361,
+        "bottom": 710.5,
+        "left": 29,
+        "width": 332,
+        "height": 63,
+        "display": "grid",
+        "visibility": "visible"
+      }
+    },
+    "choiceCount": 3,
+    "choiceMinHeight": 50,
+    "decisionActionCount": 1,
+    "decisionActionMinHeight": 46,
+    "modeCount": 4,
+    "modeMinHeight": 63,
+    "decisionState": [
+      "map-decision",
+      "is-stale"
+    ],
+    "decisionKicker": "最終取得時点",
+    "decisionTime": "08/15 09:52 · 1日前",
+    "decisionTitle": "JR成田線 遅延・注意情報あり",
+    "staleSnapshotModeCount": 4,
+    "recordedStatusModeCount": 2,
+    "internalStatusVisible": false,
+    "topPageClutterHidden": true,
+    "transportRowCount": 0,
+    "operationalNetworkAlerts": 0,
+    "mapError": ""
+  },
+  "locale_layouts": {
+    "ja": {
+      "journeyTop": 79,
+      "decisionBottom": 827,
+      "horizontalOverflow": 0,
+      "actionMinHeight": 46,
+      "modeMinHeight": 63,
+      "pass": true
+    },
+    "en": {
+      "journeyTop": 79,
+      "decisionBottom": 827,
+      "horizontalOverflow": 0,
+      "actionMinHeight": 46,
+      "modeMinHeight": 63,
+      "pass": true
+    },
+    "zh-CN": {
+      "journeyTop": 79,
+      "decisionBottom": 827,
+      "horizontalOverflow": 0,
+      "actionMinHeight": 46,
+      "modeMinHeight": 63,
+      "pass": true
+    },
+    "zh-TW": {
+      "journeyTop": 79,
+      "decisionBottom": 827,
+      "horizontalOverflow": 0,
+      "actionMinHeight": 46,
+      "modeMinHeight": 63,
+      "pass": true
+    },
+    "ko": {
+      "journeyTop": 79,
+      "decisionBottom": 827,
+      "horizontalOverflow": 0,
+      "actionMinHeight": 46,
+      "modeMinHeight": 63,
+      "pass": true
+    }
+  },
+  "result": "PASS"
+}

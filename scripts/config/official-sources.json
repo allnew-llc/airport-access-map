@@ -1,0 +1,820 @@
+{
+  "schema_version": "official-sources/1",
+  "allowed_hosts": [
+    "data.jma.go.jp",
+    "www.data.jma.go.jp",
+    "traininfo.jreast.co.jp",
+    "www.keisei.co.jp",
+    "www.driveplaza.com",
+    "www.ktr.mlit.go.jp",
+    "www.bousai.pref.chiba.lg.jp",
+    "www.narita-airport.jp",
+    "www.japan.travel",
+    "www.hokuso-railway.co.jp",
+    "www.drivetraffic.jp",
+    "www.jartic.or.jp",
+    "www.city.narita.chiba.jp",
+    "www.town.shibayama.lg.jp",
+    "www.city.tomisato.lg.jp",
+    "www.pref.chiba.lg.jp",
+    "www.limousinebus.co.jp",
+    "www.keiseibus.co.jp",
+    "www.takamatsu-airport.com",
+    "www.ibaraki-airport.net",
+    "www.hokkaido-airports.com",
+    "www.pref.kagawa.lg.jp",
+    "www.city.takamatsu.kagawa.jp",
+    "www.bousai.ibaraki.jp",
+    "www.city.omitama.lg.jp",
+    "www.bousai-hokkaido.jp",
+    "www.town.higashikagura.lg.jp",
+    "www.jma.go.jp",
+    "www.aomori-airport.co.jp",
+    "www.hna-terminal.co.jp",
+    "www.sendai-airport.co.jp",
+    "tokyo-haneda.com",
+    "www.niigata-airport.gr.jp",
+    "www.toyama-airport.jp",
+    "www.komatsuairport.jp",
+    "www.mtfuji-shizuokaairport.jp",
+    "www.centrair.jp",
+    "www.kansai-airport.or.jp",
+    "www.okayama-airport.org",
+    "www.hij.airport.jp",
+    "www.yonago-air.com",
+    "www.tokushima-airport.co.jp",
+    "www.matsuyama-airport.co.jp",
+    "www.kitakyu-air.jp",
+    "www.fukuoka-airport.jp",
+    "www.pref.saga.lg.jp",
+    "nagasaki-airport.jp",
+    "www.oita-airport.jp",
+    "www.kumamoto-airport.co.jp",
+    "www.miyazaki-airport.co.jp",
+    "www.koj-ab.co.jp",
+    "www.naha-airport.co.jp",
+    "shimojishima.jp",
+    "www.ishigaki-airport.co.jp",
+    "www.mlit.go.jp",
+    "disaportal.gsi.go.jp",
+    "www.city.obihiro.hokkaido.jp",
+    "www.city.chitose.lg.jp",
+    "www.city.hakodate.hokkaido.jp",
+    "www.city.aomori.aomori.jp",
+    "www.city.hanamaki.iwate.jp",
+    "www.city.natori.miyagi.jp",
+    "www.city.ota.tokyo.jp",
+    "www.city.niigata.lg.jp",
+    "www.city.toyama.lg.jp",
+    "www.city.komatsu.lg.jp",
+    "www.city.makinohara.shizuoka.jp",
+    "www.city.tokoname.aichi.jp",
+    "www.city.izumisano.lg.jp",
+    "www.city.okayama.jp",
+    "www.city.mihara.hiroshima.jp",
+    "www.city.sakaiminato.lg.jp",
+    "www.town.matsushige.tokushima.jp",
+    "www.city.matsuyama.ehime.jp",
+    "www.city.kitakyushu.lg.jp",
+    "www.city.fukuoka.lg.jp",
+    "www.city.saga.lg.jp",
+    "www.city.omura.nagasaki.jp",
+    "www.city.kunisaki.oita.jp",
+    "www.town.mashiki.lg.jp",
+    "www.city.miyazaki.miyazaki.jp",
+    "www.city-kirishima.jp",
+    "www.city.naha.okinawa.jp",
+    "www.city.miyakojima.lg.jp",
+    "www.city.ishigaki.okinawa.jp"
+  ],
+  "sources": [
+    {
+      "id": "jma-extra-feed",
+      "owner": "気象庁",
+      "kind": "weather",
+      "url": "https://www.data.jma.go.jp/developer/xml/feed/extra.xml",
+      "mode": "reference_only",
+      "purpose": "公式気象情報の参照先を案内する"
+    },
+    {
+      "id": "jr-narita-line",
+      "owner": "JR東日本",
+      "kind": "railway",
+      "url": "https://traininfo.jreast.co.jp/train_info/line.aspx?gid=1&lineid=naritaline",
+      "mode": "live_html_conservative",
+      "purpose": "JR成田線の公式運行情報を確認する"
+    },
+    {
+      "id": "keisei-main",
+      "owner": "京成電鉄",
+      "kind": "railway",
+      "url": "https://www.keisei.co.jp/traininfo/index.php",
+      "mode": "live_html_conservative",
+      "purpose": "京成線の公式運行情報を確認する。自動転載は行わず利用者を公式ページへ誘導する"
+    },
+    {
+      "id": "hokuso-line-status",
+      "owner": "北総鉄道",
+      "kind": "railway",
+      "url": "https://www.hokuso-railway.co.jp/train_info/",
+      "mode": "source_link_only",
+      "purpose": "北総線の運行情報を利用者が公式ページで確認する。掲載情報の転載禁止条件により自動再配信しない"
+    },
+    {
+      "id": "nexco-east-traffic",
+      "owner": "NEXCO東日本",
+      "kind": "road",
+      "url": "https://www.driveplaza.com/traffic/",
+      "mode": "source_link_only",
+      "purpose": "東関東自動車道の公式道路交通情報への導線を提供する"
+    },
+    {
+      "id": "nexco-drive-traffic",
+      "owner": "NEXCO東日本",
+      "kind": "road",
+      "url": "https://www.drivetraffic.jp/",
+      "mode": "source_link_only",
+      "purpose": "東関東道・圏央道のリアルタイム通行止め・規制・渋滞情報へ誘導する"
+    },
+    {
+      "id": "jartic-road-now",
+      "owner": "日本道路交通情報センター",
+      "kind": "road",
+      "url": "https://www.jartic.or.jp/",
+      "mode": "source_link_only",
+      "purpose": "高速道路と一般道の5分更新の道路交通情報へ誘導する"
+    },
+    {
+      "id": "mlit-chiba-road",
+      "owner": "国土交通省 関東地方整備局 千葉国道事務所",
+      "kind": "road",
+      "url": "https://www.ktr.mlit.go.jp/chiba/",
+      "mode": "source_link_only",
+      "purpose": "国道51号・295号を含む直轄国道情報への導線を提供する"
+    },
+    {
+      "id": "chiba-disaster-portal",
+      "owner": "千葉県",
+      "kind": "facility",
+      "url": "https://www.bousai.pref.chiba.lg.jp/",
+      "mode": "source_link_only",
+      "purpose": "県内避難・交通・ライフライン情報への導線を提供する"
+    },
+    {
+      "id": "narita-flight-arrivals",
+      "owner": "成田国際空港",
+      "kind": "flight",
+      "url": "https://www.narita-airport.jp/en/flight/arr-search/",
+      "mode": "source_link_only",
+      "purpose": "到着旅行者が到着便の最新状況を公式情報で確認する"
+    },
+    {
+      "id": "narita-flight-departures",
+      "owner": "成田国際空港",
+      "kind": "flight",
+      "url": "https://www.narita-airport.jp/en/flight/dep-search/",
+      "mode": "source_link_only",
+      "purpose": "出発旅行者が出発便の最新状況を公式情報で確認する"
+    },
+    {
+      "id": "narita-access-guide",
+      "owner": "成田国際空港",
+      "kind": "access",
+      "url": "https://www.narita-airport.jp/en/access/",
+      "mode": "source_link_only",
+      "purpose": "鉄道・バス・タクシー・自動車の公式アクセス案内へ誘導する"
+    },
+    {
+      "id": "airport-limousine-realtime",
+      "owner": "東京空港交通",
+      "kind": "bus",
+      "url": "https://www.limousinebus.co.jp/guide/en/realtime/",
+      "mode": "source_link_only",
+      "purpose": "成田空港発着リムジンバスの路線別リアルタイム所要時間へ誘導する"
+    },
+    {
+      "id": "keisei-bus-operations",
+      "owner": "京成電鉄バスグループ",
+      "kind": "bus",
+      "url": "https://www.keiseibus.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "高速バス・路線バスの大雨・運休・遅延に関する公式運行情報へ誘導する"
+    },
+    {
+      "id": "narita-airport-alerts",
+      "owner": "成田国際空港",
+      "kind": "facility",
+      "url": "https://www.narita-airport.jp/en/news/",
+      "mode": "source_link_only",
+      "purpose": "空港施設と災害影響に関する公式のお知らせを確認する"
+    },
+    {
+      "id": "narita-overnight-support",
+      "owner": "成田国際空港",
+      "kind": "facility",
+      "url": "https://www.narita-airport.jp/en/access/early-morning/",
+      "mode": "source_link_only",
+      "purpose": "移動不能時の24時間利用可能エリアと早朝・深夜サービスを確認する"
+    },
+    {
+      "id": "jnto-visitor-emergency",
+      "owner": "日本政府観光局",
+      "kind": "emergency",
+      "url": "https://www.japan.travel/en/plan/emergencies/",
+      "mode": "source_link_only",
+      "purpose": "訪日旅行者ホットラインと緊急時の公式案内を提供する"
+    },
+    {
+      "id": "narita-city-shelters",
+      "owner": "成田市",
+      "kind": "shelter",
+      "url": "https://www.city.narita.chiba.jp/anshin/index0336.html",
+      "mode": "source_link_only",
+      "purpose": "成田市が開設する指定避難所・早期開設避難所の確認方法を提供する"
+    },
+    {
+      "id": "shibayama-town-shelters",
+      "owner": "芝山町",
+      "kind": "shelter",
+      "url": "https://www.town.shibayama.lg.jp/0000004247.html",
+      "mode": "source_link_only",
+      "purpose": "空港南側に隣接する芝山町の指定避難所と開設条件を確認する"
+    },
+    {
+      "id": "tomisato-city-shelters",
+      "owner": "富里市",
+      "kind": "shelter",
+      "url": "https://www.city.tomisato.lg.jp/category/8-5-3-0-0-0-0-0-0-0.html",
+      "mode": "source_link_only",
+      "purpose": "空港西側に隣接する富里市の避難所・避難場所と開設情報を確認する"
+    },
+    {
+      "id": "chiba-foreign-language-support",
+      "owner": "千葉県",
+      "kind": "multilingual_support",
+      "url": "https://www.pref.chiba.lg.jp/international/",
+      "mode": "source_link_only",
+      "purpose": "外国人旅行者向けの多言語災害情報と相談窓口へ誘導する"
+    },
+    {
+      "id": "takamatsu-airport-access",
+      "owner": "高松空港株式会社",
+      "kind": "regional_airport_access",
+      "url": "https://www.takamatsu-airport.com/access/",
+      "mode": "source_link_only",
+      "purpose": "高松空港のバス・タクシー・道路アクセス公式案内へ誘導する"
+    },
+    {
+      "id": "takamatsu-international-timetable",
+      "owner": "高松空港株式会社",
+      "kind": "international_flight",
+      "url": "https://www.takamatsu-airport.com/timetable/inte-next.php",
+      "mode": "source_link_only",
+      "purpose": "高松空港の国際線就航先と運航状況の確認先を提供する"
+    },
+    {
+      "id": "kagawa-multilingual-disaster",
+      "owner": "香川県",
+      "kind": "multilingual_support",
+      "url": "https://www.pref.kagawa.lg.jp/kikikanri/sogo/bosaijoho/wcj0cp200403105310.html",
+      "mode": "source_link_only",
+      "purpose": "高松空港利用者を香川県の多言語防災・避難情報へ誘導する"
+    },
+    {
+      "id": "ibaraki-airport-access",
+      "owner": "茨城県営業戦略部空港対策課",
+      "kind": "regional_airport_access",
+      "url": "https://www.ibaraki-airport.net/access/",
+      "mode": "source_link_only",
+      "purpose": "茨城空港の石岡・水戸・つくば・東京方面アクセス公式案内へ誘導する"
+    },
+    {
+      "id": "ibaraki-international-flight",
+      "owner": "茨城県営業戦略部空港対策課",
+      "kind": "international_flight",
+      "url": "https://www.ibaraki-airport.net/flight/",
+      "mode": "source_link_only",
+      "purpose": "茨城空港の国際線運航期間・運休・再開予定を公式ページで確認する"
+    },
+    {
+      "id": "ibaraki-disaster-portal",
+      "owner": "茨城県防災・危機管理部",
+      "kind": "shelter",
+      "url": "https://www.bousai.ibaraki.jp/",
+      "mode": "source_link_only",
+      "purpose": "茨城空港利用者を県内の避難情報・指定避難所へ誘導する"
+    },
+    {
+      "id": "asahikawa-airport-access",
+      "owner": "北海道エアポート株式会社",
+      "kind": "regional_airport_access",
+      "url": "https://www.hokkaido-airports.com/ja/asahikawa/access/",
+      "mode": "source_link_only",
+      "purpose": "旭川空港の旭川駅・美瑛・富良野・旭岳方面アクセス公式案内へ誘導する"
+    },
+    {
+      "id": "asahikawa-international-flight",
+      "owner": "北海道エアポート株式会社",
+      "kind": "international_flight",
+      "url": "https://www.hokkaido-airports.com/ja/asahikawa/airport/time/",
+      "mode": "source_link_only",
+      "purpose": "旭川空港の当日から31日先までの国際線公式スケジュールへ誘導する"
+    },
+    {
+      "id": "higashikagura-disaster",
+      "owner": "北海道・東神楽町",
+      "kind": "shelter",
+      "url": "https://www.bousai-hokkaido.jp/fp/?areaCd=014532",
+      "mode": "source_link_only",
+      "purpose": "旭川空港所在地の避難情報・避難所・気象情報へ誘導する"
+    },
+    {
+      "id": "jma-disaster-map",
+      "owner": "気象庁",
+      "kind": "weather",
+      "url": "https://www.jma.go.jp/bosai/map.html",
+      "mode": "source_link_only",
+      "purpose": "各空港周辺の最新防災気象情報を気象庁公式地図で確認する"
+    },
+    {
+      "id": "mlit-2026-summer-direct-international",
+      "owner": "国土交通省 航空局",
+      "kind": "international_flight_schedule",
+      "url": "https://www.mlit.go.jp/koku/content/002000598.pdf",
+      "mode": "source_link_only",
+      "purpose": "2026年夏ダイヤの国際定期直行便が計画された国内空港を対象空港の母集団として確認する"
+    },
+    {
+      "id": "gsi-disaster-risk-portal",
+      "owner": "国土地理院",
+      "kind": "hazard_map",
+      "url": "https://disaportal.gsi.go.jp/",
+      "mode": "source_link_only",
+      "purpose": "対象空港周辺の洪水・土砂災害・高潮等のハザード情報へ誘導する"
+    },
+    {
+      "id": "airport-obo-official",
+      "owner": "とかち帯広空港",
+      "kind": "national_airport_official",
+      "url": "https://www.hokkaido-airports.com/ja/obihiro/",
+      "mode": "source_link_only",
+      "purpose": "とかち帯広空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-obo-local-support",
+      "owner": "帯広市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.obihiro.hokkaido.jp/kurashi/bousai/index.html",
+      "mode": "source_link_only",
+      "purpose": "とかち帯広空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-cts-official",
+      "owner": "新千歳空港",
+      "kind": "national_airport_official",
+      "url": "https://www.hokkaido-airports.com/ja/new-chitose/",
+      "mode": "source_link_only",
+      "purpose": "新千歳空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-cts-local-support",
+      "owner": "千歳市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.chitose.lg.jp/c50/1002703/index.html",
+      "mode": "source_link_only",
+      "purpose": "新千歳空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-hkd-official",
+      "owner": "函館空港",
+      "kind": "national_airport_official",
+      "url": "https://www.hokkaido-airports.com/ja/hakodate/",
+      "mode": "source_link_only",
+      "purpose": "函館空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-hkd-local-support",
+      "owner": "函館市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.hakodate.hokkaido.jp/docs/2021110200164/",
+      "mode": "source_link_only",
+      "purpose": "函館空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-aoj-official",
+      "owner": "青森空港",
+      "kind": "national_airport_official",
+      "url": "https://www.aomori-airport.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "青森空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-aoj-local-support",
+      "owner": "青森市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.aomori.aomori.jp/anzen_kinkyu/bousai_shoubou/",
+      "mode": "source_link_only",
+      "purpose": "青森空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-hna-official",
+      "owner": "いわて花巻空港",
+      "kind": "national_airport_official",
+      "url": "https://www.hna-terminal.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "いわて花巻空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-hna-local-support",
+      "owner": "花巻市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.hanamaki.iwate.jp/kurashi/anshin_anzen/bousai_saigai/index.html",
+      "mode": "source_link_only",
+      "purpose": "いわて花巻空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-sdj-official",
+      "owner": "仙台空港",
+      "kind": "national_airport_official",
+      "url": "https://www.sendai-airport.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "仙台空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-sdj-local-support",
+      "owner": "名取市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.natori.miyagi.jp/site/bousai-keiiban/",
+      "mode": "source_link_only",
+      "purpose": "仙台空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-hnd-official",
+      "owner": "羽田空港",
+      "kind": "national_airport_official",
+      "url": "https://tokyo-haneda.com/index.html",
+      "mode": "source_link_only",
+      "purpose": "羽田空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-hnd-local-support",
+      "owner": "大田区",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.ota.tokyo.jp/koujiya_haneda/bousai/index.html",
+      "mode": "source_link_only",
+      "purpose": "羽田空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-kij-official",
+      "owner": "新潟空港",
+      "kind": "national_airport_official",
+      "url": "https://www.niigata-airport.gr.jp/",
+      "mode": "source_link_only",
+      "purpose": "新潟空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-kij-local-support",
+      "owner": "新潟市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.niigata.lg.jp/kurashi/bosai/",
+      "mode": "source_link_only",
+      "purpose": "新潟空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-toy-official",
+      "owner": "富山空港",
+      "kind": "national_airport_official",
+      "url": "https://www.toyama-airport.jp/",
+      "mode": "source_link_only",
+      "purpose": "富山空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-toy-local-support",
+      "owner": "富山市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.toyama.lg.jp/bosai/bosai/1010655/index.html",
+      "mode": "source_link_only",
+      "purpose": "富山空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-kmq-official",
+      "owner": "小松空港",
+      "kind": "national_airport_official",
+      "url": "https://www.komatsuairport.jp/",
+      "mode": "source_link_only",
+      "purpose": "小松空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-kmq-local-support",
+      "owner": "小松市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.komatsu.lg.jp/kurasi_tetuzuki/bosai_kyukyu/",
+      "mode": "source_link_only",
+      "purpose": "小松空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-fsz-official",
+      "owner": "富士山静岡空港",
+      "kind": "national_airport_official",
+      "url": "https://www.mtfuji-shizuokaairport.jp/",
+      "mode": "source_link_only",
+      "purpose": "富士山静岡空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-fsz-local-support",
+      "owner": "牧之原市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.makinohara.shizuoka.jp/life/5/22/",
+      "mode": "source_link_only",
+      "purpose": "富士山静岡空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-ngo-official",
+      "owner": "中部国際空港",
+      "kind": "national_airport_official",
+      "url": "https://www.centrair.jp/",
+      "mode": "source_link_only",
+      "purpose": "中部国際空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-ngo-local-support",
+      "owner": "常滑市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.tokoname.aichi.jp/kurashi/bousai/index.html",
+      "mode": "source_link_only",
+      "purpose": "中部国際空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-kix-official",
+      "owner": "関西国際空港",
+      "kind": "national_airport_official",
+      "url": "https://www.kansai-airport.or.jp/",
+      "mode": "source_link_only",
+      "purpose": "関西国際空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-kix-local-support",
+      "owner": "泉佐野市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.izumisano.lg.jp/kakuka/kikikanri/bousai/menu/bou/index.html",
+      "mode": "source_link_only",
+      "purpose": "関西国際空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-okj-official",
+      "owner": "岡山桃太郎空港",
+      "kind": "national_airport_official",
+      "url": "https://www.okayama-airport.org/",
+      "mode": "source_link_only",
+      "purpose": "岡山桃太郎空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-okj-local-support",
+      "owner": "岡山市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.okayama.jp/kurashi/0000011520.html",
+      "mode": "source_link_only",
+      "purpose": "岡山桃太郎空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-hij-official",
+      "owner": "広島空港",
+      "kind": "national_airport_official",
+      "url": "https://www.hij.airport.jp/",
+      "mode": "source_link_only",
+      "purpose": "広島空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-hij-local-support",
+      "owner": "三原市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.mihara.hiroshima.jp/soshiki/19/index.html",
+      "mode": "source_link_only",
+      "purpose": "広島空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-ygj-official",
+      "owner": "米子鬼太郎空港",
+      "kind": "national_airport_official",
+      "url": "https://www.yonago-air.com/",
+      "mode": "source_link_only",
+      "purpose": "米子鬼太郎空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-ygj-local-support",
+      "owner": "境港市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.sakaiminato.lg.jp/index.php?view=106852",
+      "mode": "source_link_only",
+      "purpose": "米子鬼太郎空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-tks-official",
+      "owner": "徳島阿波おどり空港",
+      "kind": "national_airport_official",
+      "url": "https://www.tokushima-airport.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "徳島阿波おどり空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-tks-local-support",
+      "owner": "松茂町",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.town.matsushige.tokushima.jp/docs/2026032900024/",
+      "mode": "source_link_only",
+      "purpose": "徳島阿波おどり空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-myj-official",
+      "owner": "松山空港",
+      "kind": "national_airport_official",
+      "url": "https://www.matsuyama-airport.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "松山空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-myj-local-support",
+      "owner": "松山市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.matsuyama.ehime.jp/kurashi/bosai/bousai/index.html",
+      "mode": "source_link_only",
+      "purpose": "松山空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-kkj-official",
+      "owner": "北九州空港",
+      "kind": "national_airport_official",
+      "url": "https://www.kitakyu-air.jp/",
+      "mode": "source_link_only",
+      "purpose": "北九州空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-kkj-local-support",
+      "owner": "北九州市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.kitakyushu.lg.jp/contents/13801050.html",
+      "mode": "source_link_only",
+      "purpose": "北九州空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-fuk-official",
+      "owner": "福岡空港",
+      "kind": "national_airport_official",
+      "url": "https://www.fukuoka-airport.jp/",
+      "mode": "source_link_only",
+      "purpose": "福岡空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-fuk-local-support",
+      "owner": "福岡市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.fukuoka.lg.jp/bousai/hinanmain.html",
+      "mode": "source_link_only",
+      "purpose": "福岡空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-hsg-official",
+      "owner": "九州佐賀国際空港",
+      "kind": "national_airport_official",
+      "url": "https://www.pref.saga.lg.jp/airport/",
+      "mode": "source_link_only",
+      "purpose": "九州佐賀国際空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-hsg-local-support",
+      "owner": "佐賀市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.saga.lg.jp/bosai-anzen/bosai/3/1136.html",
+      "mode": "source_link_only",
+      "purpose": "九州佐賀国際空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-ngs-official",
+      "owner": "長崎空港",
+      "kind": "national_airport_official",
+      "url": "https://nagasaki-airport.jp/",
+      "mode": "source_link_only",
+      "purpose": "長崎空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-ngs-local-support",
+      "owner": "大村市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.omura.nagasaki.jp/kurashi/anzen/bosai/index.html",
+      "mode": "source_link_only",
+      "purpose": "長崎空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-oit-official",
+      "owner": "大分空港",
+      "kind": "national_airport_official",
+      "url": "https://www.oita-airport.jp/",
+      "mode": "source_link_only",
+      "purpose": "大分空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-oit-local-support",
+      "owner": "国東市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.kunisaki.oita.jp/soshiki/kikikanri/index.html",
+      "mode": "source_link_only",
+      "purpose": "大分空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-kmj-official",
+      "owner": "阿蘇くまもと空港",
+      "kind": "national_airport_official",
+      "url": "https://www.kumamoto-airport.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "阿蘇くまもと空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-kmj-local-support",
+      "owner": "益城町",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.town.mashiki.lg.jp/bousai/",
+      "mode": "source_link_only",
+      "purpose": "阿蘇くまもと空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-kmi-official",
+      "owner": "宮崎ブーゲンビリア空港",
+      "kind": "national_airport_official",
+      "url": "https://www.miyazaki-airport.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "宮崎ブーゲンビリア空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-kmi-local-support",
+      "owner": "宮崎市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.miyazaki.miyazaki.jp/evacuation_site.html",
+      "mode": "source_link_only",
+      "purpose": "宮崎ブーゲンビリア空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-koj-official",
+      "owner": "鹿児島空港",
+      "kind": "national_airport_official",
+      "url": "https://www.koj-ab.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "鹿児島空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-koj-local-support",
+      "owner": "霧島市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city-kirishima.jp/anshin/ooame.html",
+      "mode": "source_link_only",
+      "purpose": "鹿児島空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-oka-official",
+      "owner": "那覇空港",
+      "kind": "national_airport_official",
+      "url": "https://www.naha-airport.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "那覇空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-oka-local-support",
+      "owner": "那覇市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.naha.okinawa.jp/safety/saigai/1001598/index.html",
+      "mode": "source_link_only",
+      "purpose": "那覇空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-shi-official",
+      "owner": "みやこ下地島空港",
+      "kind": "national_airport_official",
+      "url": "https://shimojishima.jp/",
+      "mode": "source_link_only",
+      "purpose": "みやこ下地島空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-shi-local-support",
+      "owner": "宮古島市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.miyakojima.lg.jp/website/saigaijyouhou/",
+      "mode": "source_link_only",
+      "purpose": "みやこ下地島空港所在地の防災情報・避難所へ利用者を誘導する"
+    },
+    {
+      "id": "airport-isg-official",
+      "owner": "南ぬ島石垣空港",
+      "kind": "national_airport_official",
+      "url": "https://www.ishigaki-airport.co.jp/",
+      "mode": "source_link_only",
+      "purpose": "南ぬ島石垣空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+    },
+    {
+      "id": "airport-isg-local-support",
+      "owner": "石垣市",
+      "kind": "municipal_disaster_support",
+      "url": "https://www.city.ishigaki.okinawa.jp/kurashi_gyosei/kurashi/anshin_anzen/bosai/index.html",
+      "mode": "source_link_only",
+      "purpose": "南ぬ島石垣空港所在地の防災情報・避難所へ利用者を誘導する"
+    }
+  ]
+}

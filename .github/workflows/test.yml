@@ -1,0 +1,49 @@
+name: Test
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run verify:oss
+      - name: Verify 390x844 mobile experience
+        shell: bash
+        run: |
+          set -euo pipefail
+          VITE_SAMPLE_DEMO=true VITE_PUBLIC_BASE=/ npm run dev -- --host 127.0.0.1 > /tmp/airport-access-vite.log 2>&1 &
+          vite_pid=$!
+          cleanup() {
+            kill "${chrome_pid:-}" "$vite_pid" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+          vite_ready=false
+          for _ in {1..40}; do
+            if curl --fail --silent http://127.0.0.1:5173/ >/dev/null; then vite_ready=true; break; fi
+            sleep 0.25
+          done
+          if [[ "$vite_ready" != true ]]; then cat /tmp/airport-access-vite.log; exit 1; fi
+          google-chrome --headless=new --no-sandbox --disable-dev-shm-usage \
+            --use-gl=swiftshader --enable-unsafe-swiftshader \
+            --remote-debugging-port=9225 --window-size=390,844 \
+            'http://127.0.0.1:5173/?airport=nrt' > /tmp/airport-access-chrome.log 2>&1 &
+          chrome_pid=$!
+          chrome_ready=false
+          for _ in {1..120}; do
+            if curl --fail --silent http://127.0.0.1:9225/json/version >/dev/null; then chrome_ready=true; break; fi
+            sleep 0.25
+          done
+          if [[ "$chrome_ready" != true ]]; then cat /tmp/airport-access-chrome.log; exit 1; fi
+          npm run verify:mobile -- --port 9225 --url 'http://127.0.0.1:5173/?airport=nrt'
+          npm run verify:mobile -- --port 9225 --url 'http://127.0.0.1:5173/?airport=tak'

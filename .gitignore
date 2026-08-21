@@ -1,0 +1,24 @@
+node_modules/
+dist/
+scripts/.cache/
+.DS_Store
+*.log
+
+# Local Factory Maker state and internal evaluation artifacts
+.factory/
+factory-blueprint.json
+factory-control/
+artifacts/
+
+# Collected or reviewed real-world records are deliberately excluded from the
+# public OSS repository. The public demo ships fictional sample data only.
+data/history/
+docs/evidence/
+public/data/latest-disaster.json
+public/data/history-index.json
+public/data/history-*.json
+.github/workflows/update-data.yml
+scripts/private/
+
+# Large design explorations are retained locally, not in the source release.
+docs/design-concepts/

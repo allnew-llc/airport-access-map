@@ -1,0 +1,35 @@
+{
+  "name": "airport-access-map",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Zero-cost static disaster transport map for international gateway airports across Japan.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "network:update": "node scripts/fetch-network-routes.js",
+    "airport-routes:update": "node scripts/build-national-airport-routes.js",
+    "airport-sources:sync": "node scripts/sync-national-airport-sources.js",
+    "sample:generate": "node scripts/generate-sample-demo-data.js",
+    "sample:validate": "node scripts/validate-sample-demo-data.js",
+    "validate:publication": "node scripts/validate-publication-boundary.js",
+    "build:demo": "npm run sample:generate && npm run sample:validate && VITE_SAMPLE_DEMO=true VITE_PUBLIC_BASE=/demo/airport-access/ vite build && node scripts/prepare-demo-entry.js",
+    "build:pages": "npm run sample:generate && npm run sample:validate && VITE_SAMPLE_DEMO=true VITE_PUBLIC_BASE=/airport-access-map/ vite build && node scripts/prepare-demo-entry.js",
+    "validate:network": "node scripts/fetch-network-routes.js --validate-only",
+    "validate:sources": "node scripts/validate-sources.js",
+    "verify:mobile": "node scripts/verify-mobile-first-screen.js",
+    "test": "node --test",
+    "verify": "npm run verify:oss",
+    "verify:oss": "npm run validate:publication && npm run validate:sources && npm run validate:network && npm run sample:generate && npm run sample:validate && npm test && npm run build:pages"
+  },
+  "dependencies": {
+    "maplibre-gl": "6.3.0"
+  },
+  "devDependencies": {
+    "vite": "8.2.1"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}
