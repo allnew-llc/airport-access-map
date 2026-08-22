@@ -105,16 +105,14 @@ test("frontend quality floor is present", async () => {
 });
 
 test("390 by 844 map-first screen combines a status ticker, semantic map and layer toggles", async () => {
-  const [html, css, main, wireframe, spec] = await Promise.all([
+  const [html, css, main, spec] = await Promise.all([
     readFile(new URL("../index.html", import.meta.url), "utf8"),
     readFile(new URL("../src/style.css", import.meta.url), "utf8"),
     readFile(new URL("../src/main.js", import.meta.url), "utf8"),
-    readFile(new URL("../docs/wireframes/map-first-top-390x844.svg", import.meta.url), "utf8"),
-    readFile(new URL("../docs/map-first-top-page-d.md", import.meta.url), "utf8")
+    readFile(new URL("../docs/map-first-information-design.md", import.meta.url), "utf8")
   ]);
-  assert.match(wireframe, /width="390" height="844" viewBox="0 0 390 844"/);
   assert.match(spec, /30秒以内の移動判断/);
-  assert.match(spec, /旅行状況の3選択、地図、鮮度、最重要事象、公式確認ボタン/);
+  assert.match(spec, /移動方向の3選択、地図、交通状況の要点/);
   assert.match(html, /class="map-journey-switch"/);
   assert.match(html, /id="map-decision"/);
   assert.match(html, /id="status-ticker"/);
@@ -249,7 +247,7 @@ test("traveler task verification covers route selection and ten-second decisions
   assert.match(report, /計測型認知ウォークスルー/);
   assert.match(report, /到着[\s\S]*?2/);
   assert.match(report, /出発[\s\S]*?3/);
-  assert.match(report, /移動不能[\s\S]*?1/);
+  assert.match(report, /空港滞在[\s\S]*?1/);
   assert.match(report, /日本語・英語・簡体字・繁体字・韓国語/);
 });
 

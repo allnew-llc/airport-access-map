@@ -26,9 +26,9 @@ Airport Access Mapは、国際便が就航する日本の空港を利用する�
 | --- | --- |
 | Webアプリのソースコード | 未許諾の交通事業者ページ本文 |
 | 架空であることを明示したサンプルデータ | 実際の運行履歴・取得済みスナップショット |
-| OpenStreetMap由来の静的な参考経路 | APIキー、収集キャッシュ、内部監査証跡 |
+| OpenStreetMap由来の静的な参考経路 | APIキー、実データの取得・保存ファイル |
 | 公式サイトへのリンク台帳 | 実運行・通行状態を断定するデータ |
-| 検証スクリプトと回帰テスト | 制作途中の画像・動画・内部Factory設定 |
+| 検証スクリプトと品質確認 | 公開に不要な制作・運用ファイル |
 
 公開版のGitHub Actionsは架空サンプルだけをビルドします。実データの自動取得は実行しません。実運用へ移行する場合は、提供者ごとの明示ライセンスまたは書面許諾、データ品質管理、監視、運用責任者が別途必要です。
 
@@ -50,7 +50,7 @@ Vite、Vanilla JavaScript、MapLibre GL JSで構成し、HTML、JavaScript、Geo
 
 ### Andon Gate
 
-更新処理に失敗したとき、その障害を利用者画面まで連鎖させないための安全弁です。候補データが空、形式不正、非公式ホスト、範囲外座標などの場合は公開ファイルを更新せず、壊れた候補で直前の正常ファイルを上書きしないことをテストします。
+更新処理に失敗したとき、その障害を利用者画面まで連鎖させないための安全弁です。候補データが空、形式不正、非公式ホスト、範囲外座標などの場合は公開ファイルを更新せず、壊れた候補で直前の正常ファイルが上書きされることを防ぎます。
 
 ### Evidence Gate
 
@@ -58,7 +58,7 @@ Vite、Vanilla JavaScript、MapLibre GL JSで構成し、HTML、JavaScript、Geo
 
 ### 多空港対応
 
-空港固有情報は`src/airport-registry.js`、自治体支援情報は`src/national-airport-local-support.js`へ分離しています。空港直結鉄道がない空港を鉄道路線のように描かないことも回帰テストで確認します。
+空港名、地図の表示範囲、交通手段、自治体支援などの設定を空港単位で管理しています。共通の画面構造を保ったまま、対象空港を追加できる構成です。
 
 ## 対象空港
 
@@ -93,7 +93,7 @@ VITE_SAMPLE_DEMO=true VITE_PUBLIC_BASE=/ npm run dev
 npm run verify:oss
 ```
 
-このコマンドは、公式リンクのallowlist、参考経路、33空港分の架空サンプル、Node.js回帰テスト、GitHub Pages用production buildを検証します。
+このコマンドは、公式リンクのallowlist、参考経路、33空港分の架空サンプル、自動テスト、GitHub Pages用production buildを検証します。
 
 実ブラウザをリモートデバッグ付きで起動している場合は、390×844pxの表示も測定できます。
 
@@ -112,7 +112,7 @@ scripts/config/         公式リンクの参照先
 public/data/sample/     33空港分の架空サンプル
 public/data/access-network.geojson
                         OpenStreetMap由来の参考経路
-test/                   回帰テスト
+test/                   自動テスト
 docs/                   設計・UX・データ境界
 ```
 
