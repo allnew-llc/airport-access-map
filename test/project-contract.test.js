@@ -9,6 +9,18 @@ test("official source registry is complete and allowlisted", async () => {
   assert.ok(registry.sources.every((source) => source.url.startsWith("https://")));
 });
 
+test("public design documents explain why traffic collection is isolated from page views", async () => {
+  const [readme, overview] = await Promise.all([
+    readFile(new URL("../README.md", import.meta.url), "utf8"),
+    readFile(new URL("../docs/project-overview.md", import.meta.url), "utf8")
+  ]);
+
+  assert.match(readme, /閲覧トラフィックを交通事業者のAPIやWebサーバーへ直接転送しません/);
+  assert.match(overview, /旅行者の閲覧数と、交通事業者への取得回数を切り離す/);
+  assert.match(overview, /直前の正常な静的ファイルを維持/);
+  assert.match(overview, /常時起動するバックエンドや従量課金の地図APIを使わず/);
+});
+
 test("frontend quality floor is present", async () => {
   const [html, css, main, i18n, airports, terms] = await Promise.all([
     readFile(new URL("../index.html", import.meta.url), "utf8"),
