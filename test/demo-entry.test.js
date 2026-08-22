@@ -38,6 +38,10 @@ test("demo introduction explains the one-view value before consent", async () =>
   assert.match(intro, /data-copy="lead">鉄道・バス・道路の運行・規制と気象情報を、空港ごとに確認できるオープンソースWebアプリです。/);
   assert.match(script, /title: "Airport transport and weather in one view"/);
   assert.match(intro, /data-copy="problemLabel">これまで（複数の公式サイト）/);
+  assert.match(intro, /class="developer-story"/);
+  assert.match(intro, /data-copy="storyTitle">情報を探し回った経験から始まりました/);
+  assert.match(script, /公共交通機関の乱れに遭遇した際/);
+  assert.match(script, /This OSS is published as a practical starting point/);
   assert.match(intro, /class="source-card source-rail"/);
   assert.match(intro, /class="unified-card"/);
   assert.match(intro, /class="unified-map-base" src="\.\/demo-map-narita-v1\.webp"/);
