@@ -35,6 +35,28 @@ test("all legal locales disclose GitHub Pages and the MapLibre licence", async (
   assert.match(mapLibreLicence, /Redistribution and use in source and binary forms/);
 });
 
+test("public-facing documents describe the current product instead of development defects", async () => {
+  const documents = await Promise.all([
+    read("README.md"),
+    read("docs/project-overview.md"),
+    read("docs/traveler-needs.md"),
+    read("docs/map-first-information-design.md"),
+    read("docs/mobile-first-screen-390x844.md"),
+    read("docs/usability-10-second-task-test-2026-08-17.md"),
+    read("docs/ux-research-dads-tokyo-2026-08-17.md"),
+    read("docs/ux-ui-guideline-application-2026-08-15.md"),
+  ]);
+  const publicCopy = documents.join("\n");
+
+  assert.doesNotMatch(publicCopy, /空港直結鉄道がない空港を鉄道路線のように描かない/);
+  assert.doesNotMatch(publicCopy, /発見・是正した問題/);
+  assert.doesNotMatch(publicCopy, /ドラッグハンドル風の装飾/);
+  assert.doesNotMatch(publicCopy, /内部Factory設定|内部監査証跡/);
+  assert.doesNotMatch(publicCopy, /# D案/);
+  assert.doesNotMatch(publicCopy, /自動検証は32件/);
+  assert.doesNotMatch(publicCopy, /移動不能|移動できないとき/);
+});
+
 test("GitHub Actions use immutable action revisions and separate PR verification from Pages deployment", async () => {
   const [pagesWorkflow, testWorkflow] = await Promise.all([
     read(".github/workflows/pages.yml"),
