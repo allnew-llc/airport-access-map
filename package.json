@@ -24,7 +24,7 @@
     "verify:oss": "npm run validate:publication && npm run validate:sources && npm run validate:network && npm run sample:generate && npm run sample:validate && npm test && npm run build:pages"
   },
   "dependencies": {
-    "maplibre-gl": "6.3.0"
+    "maplibre-gl": "6.4.1"
   },
   "devDependencies": {
     "vite": "8.2.1"
