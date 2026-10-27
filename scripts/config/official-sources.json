@@ -34,7 +34,7 @@
     "www.sendai-airport.co.jp",
     "tokyo-haneda.com",
     "www.niigata-airport.gr.jp",
-    "www.toyama-airport.jp",
+    "www.kochiap.co.jp",
     "www.komatsuairport.jp",
     "www.mtfuji-shizuokaairport.jp",
     "www.centrair.jp",
@@ -65,7 +65,7 @@
     "www.city.natori.miyagi.jp",
     "www.city.ota.tokyo.jp",
     "www.city.niigata.lg.jp",
-    "www.city.toyama.lg.jp",
+    "www.city.nankoku.lg.jp",
     "www.city.komatsu.lg.jp",
     "www.city.makinohara.shizuoka.jp",
     "www.city.tokoname.aichi.jp",
@@ -481,20 +481,20 @@
       "purpose": "新潟空港所在地の防災情報・避難所へ利用者を誘導する"
     },
     {
-      "id": "airport-toy-official",
-      "owner": "富山空港",
+      "id": "airport-kcz-official",
+      "owner": "高知龍馬空港",
       "kind": "national_airport_official",
-      "url": "https://www.toyama-airport.jp/",
+      "url": "https://www.kochiap.co.jp/",
       "mode": "source_link_only",
-      "purpose": "富山空港のフライト・施設・地上アクセスの公式案内へ誘導する"
+      "purpose": "高知龍馬空港のフライト・施設・地上アクセスの公式案内へ誘導する"
     },
     {
-      "id": "airport-toy-local-support",
-      "owner": "富山市",
+      "id": "airport-kcz-local-support",
+      "owner": "南国市",
       "kind": "municipal_disaster_support",
-      "url": "https://www.city.toyama.lg.jp/bosai/bosai/1010655/index.html",
+      "url": "https://www.city.nankoku.lg.jp/bosai/",
       "mode": "source_link_only",
-      "purpose": "富山空港所在地の防災情報・避難所へ利用者を誘導する"
+      "purpose": "高知龍馬空港所在地の防災情報・避難所へ利用者を誘導する"
     },
     {
       "id": "airport-kmq-official",

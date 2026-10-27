@@ -47,6 +47,8 @@ const airport = ({
 
 // 国土交通省「2026年夏ダイヤ 国際定期便（直行便）」掲載空港のうち、
 // NRT / TAK / IBR（既存設定）を除く空港。AKJは利用者指定により別設定で維持する。
+// 公開サンプルでは高知龍馬空港（KCZ、四国）をその枠に置いている。
+// 同ダイヤの直行便集計に高知龍馬空港は無いため、週便数は 0 とする。
 export const NATIONAL_AIRPORT_CATALOG = Object.freeze([
   airport({
     id: "obo", code: "OBO", region: "hokkaido",
@@ -129,14 +131,14 @@ export const NATIONAL_AIRPORT_CATALOG = Object.freeze([
     weeklyFlights: 5
   }),
   airport({
-    id: "toy", code: "TOY", region: "hokuriku",
-    name: localized("富山空港", "Toyama Airport", "富山机场", "富山機場", "도야마공항"),
-    airportCoordinate: [137.1878, 36.6483],
-    gateway: localized("富山駅", "Toyama Station"), gatewayCoordinate: [137.2137, 36.7014],
-    home: "https://www.toyama-airport.jp/",
-    flight: "https://www.toyama-airport.jp/flight",
-    access: "https://www.toyama-airport.jp/access",
-    weeklyFlights: 2
+    id: "kcz", code: "KCZ", region: "shikoku",
+    name: localized("高知龍馬空港", "Kochi Ryoma Airport", "高知龙马机场", "高知龍馬機場", "고치료마공항"),
+    airportCoordinate: [133.6694, 33.5461],
+    gateway: localized("高知駅", "Kochi Station", "高知站", "高知站", "고치역"), gatewayCoordinate: [133.5435, 33.5672],
+    home: "https://www.kochiap.co.jp/",
+    flight: "https://www.kochiap.co.jp/flight/",
+    access: "https://www.kochiap.co.jp/access/",
+    weeklyFlights: 0
   }),
   airport({
     id: "kmq", code: "KMQ", region: "hokuriku",

@@ -61,10 +61,10 @@ export const NATIONAL_AIRPORT_LOCAL_SUPPORT = Object.freeze({
     disaster: "https://www.city.niigata.lg.jp/kurashi/bosai/",
     shelter: "https://www.city.niigata.lg.jp/kurashi/bosai/hinanjo/hinanjo.html"
   }),
-  toy: support({
-    municipality: localized("富山市", "Toyama City"),
-    disaster: "https://www.city.toyama.lg.jp/bosai/bosai/1010655/index.html",
-    shelter: "https://www.city.toyama.lg.jp/bosai/bosai/1010655/1010656/1007904.html"
+  kcz: support({
+    municipality: localized("南国市", "Nankoku City"),
+    disaster: "https://www.city.nankoku.lg.jp/bosai/",
+    shelter: "https://www.city.nankoku.lg.jp/life/life_dtl.php?hdnKey=1779"
   }),
   kmq: support({
     municipality: localized("小松市", "Komatsu City"),
