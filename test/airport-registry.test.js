@@ -71,9 +71,9 @@ test("regional pages publish links and reference geometry without inventing tran
   }
 });
 
-test("the 2026 MLIT direct-international schedule is completely represented", () => {
+test("the 2026 MLIT direct-international schedule is represented, with KCZ in the former sample slot", () => {
   const mlitCodes = [
-    "OBO", "CTS", "HKD", "AOJ", "HNA", "SDJ", "IBR", "NRT", "HND", "KIJ", "TOY", "KMQ", "FSZ", "NGO", "KIX",
+    "OBO", "CTS", "HKD", "AOJ", "HNA", "SDJ", "IBR", "NRT", "HND", "KIJ", "KCZ", "KMQ", "FSZ", "NGO", "KIX",
     "OKJ", "HIJ", "YGJ", "TAK", "TKS", "MYJ", "KKJ", "FUK", "HSG", "NGS", "OIT", "KMJ", "KMI", "KOJ", "OKA", "SHI", "ISG"
   ];
   assert.equal(NATIONAL_AIRPORT_CATALOG.length, 29);

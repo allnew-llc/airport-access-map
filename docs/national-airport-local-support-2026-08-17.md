@@ -23,7 +23,6 @@
 | 仙台 | 名取市 | [防災掲示板](https://www.city.natori.miyagi.jp/site/bousai-keiiban/) / [開設中の避難所等](https://www.city.natori.miyagi.jp/site/bousai-keiiban/24982.html) |
 | 羽田 | 大田区 | [糀谷・羽田地域の防災情報](https://www.city.ota.tokyo.jp/koujiya_haneda/bousai/index.html) |
 | 新潟 | 新潟市 | [防災・災害](https://www.city.niigata.lg.jp/kurashi/bosai/) / [避難所・避難場所](https://www.city.niigata.lg.jp/kurashi/bosai/hinanjo/hinanjo.html) |
-| 富山 | 富山市 | [災害への備え](https://www.city.toyama.lg.jp/bosai/bosai/1010655/index.html) / [緊急避難場所・避難所](https://www.city.toyama.lg.jp/bosai/bosai/1010655/1010656/1007904.html) |
 | 小松 | 小松市 | [防災・救急](https://www.city.komatsu.lg.jp/kurasi_tetuzuki/bosai_kyukyu/) / [避難所](https://www.city.komatsu.lg.jp/kurasi_tetuzuki/bosai_kyukyu/1/3/7216.html) |
 | 富士山静岡 | 牧之原市 | [防災・消防](https://www.city.makinohara.shizuoka.jp/life/5/22/) / [避難所](https://www.city.makinohara.shizuoka.jp/life/5/22/103/index.html) |
 | 中部 | 常滑市 | [防災](https://www.city.tokoname.aichi.jp/kurashi/bousai/index.html) / [避難所開設基準](https://www.city.tokoname.aichi.jp/kurashi/bousai/1003742/1003743.html) |
@@ -33,6 +32,7 @@
 | 米子 | 境港市 | [指定緊急避難場所・指定避難所](https://www.city.sakaiminato.lg.jp/index.php?view=106852) |
 | 徳島 | 松茂町 | [ハザードマップ・避難所](https://www.town.matsushige.tokushima.jp/docs/2026032900024/) |
 | 松山 | 松山市 | [防災・危機管理](https://www.city.matsuyama.ehime.jp/kurashi/bosai/bousai/index.html) / [避難所・避難場所](https://www.city.matsuyama.ehime.jp/kurashi/bosai/bousai/hinansyo/index.html) |
+| 高知龍馬 | 南国市 | [防災・災害情報](https://www.city.nankoku.lg.jp/bosai/) / [避難場所リスト](https://www.city.nankoku.lg.jp/life/life_dtl.php?hdnKey=1779) |
 | 北九州 | 北九州市 | [防災情報](https://www.city.kitakyushu.lg.jp/contents/13801050.html) |
 | 福岡 | 福岡市 | [避難情報](https://www.city.fukuoka.lg.jp/bousai/hinanmain.html) / [指定避難所](https://www.city.fukuoka.lg.jp/bousai/shiteihinannbasyooyobishiteihinannjyoitirann.html) |
 | 佐賀 | 佐賀市 | [防災マップ](https://www.city.saga.lg.jp/bosai-anzen/bosai/3/1136.html) / [避難所](https://www.city.saga.lg.jp/bosai-anzen/bosai/2/3575.html) |
